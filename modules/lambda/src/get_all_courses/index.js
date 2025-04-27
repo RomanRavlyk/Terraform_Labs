@@ -11,7 +11,16 @@ exports.handler = (event, context, callback) => {
   dynamodb.scan(params, (err, data) => {
     if (err) {
       console.log(err);
-      callback(err);
+      callback(null, {
+        statusCode: 500,
+        body: JSON.stringify({
+          message: "Internal server error",
+          error: err
+        }),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
     } else {
       const courses = data.Items.map(item => {
         return {
@@ -23,7 +32,14 @@ exports.handler = (event, context, callback) => {
           category: item.category.S
         };
       });
-      callback(null, courses);
+
+      callback(null, {
+        statusCode: 200,
+        body: JSON.stringify(courses),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
     }
   });
 };

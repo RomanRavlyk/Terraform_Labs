@@ -38,6 +38,16 @@ module "lambda_get_all_authors" {
     }
   }
 
+  allowed_triggers = {
+    APIGatewayAny = {
+      service = "apigateway"
+      source_arn = "${var.aws_api_gateway_rest_api_execution_arn}/*/*/*"
+    }
+  }
+
+  publish = true
+  create_current_version_allowed_triggers = false
+
   tags = module.label.tags
 }
 
@@ -73,6 +83,15 @@ module "lambda_get_all_courses" {
     }
   }
 
+  allowed_triggers = {
+    APIGatewayAny = {
+      service = "apigateway"
+      source_arn = "${var.aws_api_gateway_rest_api_execution_arn}/*/*/*"
+    }
+  }
+
+  publish = true
+  create_current_version_allowed_triggers = false
   tags = module.label.tags
 }
 
@@ -107,6 +126,16 @@ module "lambda_update_course" {
       resources = ["${var.courses_table_arn}"]
     }
   }
+
+  allowed_triggers = {
+    APIGatewayAny = {
+      service = "apigateway"
+      source_arn = "${var.aws_api_gateway_rest_api_execution_arn}/*/*/*"
+    }
+  }
+
+  publish = true
+  create_current_version_allowed_triggers = false
 
   tags = module.label.tags
 }
@@ -143,6 +172,16 @@ module "lambda_save_course" {
     }
   }
 
+    allowed_triggers = {
+    APIGatewayAny = {
+      service = "apigateway"
+      source_arn = "${var.aws_api_gateway_rest_api_execution_arn}/*/*/*"
+    }
+  }
+
+  publish = true
+  create_current_version_allowed_triggers = false
+
   tags = module.label.tags
 }
 
@@ -178,6 +217,16 @@ module "lambda_delete_course" {
     }
   }
 
+    allowed_triggers = {
+    APIGatewayAny = {
+      service = "apigateway"
+      source_arn = "${var.aws_api_gateway_rest_api_execution_arn}/*/*/*"
+    }
+  }
+
+  publish = true
+  create_current_version_allowed_triggers = false
+
   tags = module.label.tags
 }
 
@@ -212,6 +261,16 @@ module "lambda_get_course" {
       resources = ["${var.courses_table_arn}"]
     }
   }
+
+    allowed_triggers = {
+    APIGatewayAny = {
+      service = "apigateway"
+      source_arn = "${var.aws_api_gateway_rest_api_execution_arn}/*/*/*"
+    }
+  }
+
+  publish = true
+  create_current_version_allowed_triggers = false
 
   tags = module.label.tags
 }
